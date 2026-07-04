@@ -1,11 +1,11 @@
-
-import "@/index.css"
-import { BrowserRouter, Outlet } from 'react-router'
+import '@/index.css'
+import { CERoutes } from '@/Routes'
+import { BrowserRouter } from 'react-router'
 
 export function App() {
   return (
     <BrowserRouter>
-      <Outlet />
+      <CERoutes />
     </BrowserRouter>
   )
 }

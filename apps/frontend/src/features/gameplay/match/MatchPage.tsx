@@ -1,3 +1,3 @@
-export function Match() {
-  return <div>Match Component</div>
+export const Match = () => {
+  return <div>match placeholder</div>
 }

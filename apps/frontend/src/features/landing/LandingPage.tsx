@@ -1,3 +1,3 @@
-export function Landing() {
-  return <div>Landing Page</div>
+export const Landing = () => {
+  return <div>landing placeholder</div>
 }

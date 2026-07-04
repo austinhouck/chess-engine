@@ -1,3 +1,9 @@
-export function Layout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+import { Outlet } from 'react-router'
+
+export const Layout = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 }

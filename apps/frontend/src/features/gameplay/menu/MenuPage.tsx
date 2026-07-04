@@ -1,3 +1,3 @@
-export function Menu() {
-  return <div>Game Menu</div>
+export const Menu = () => {
+  return <div>menu placeholder</div>
 }

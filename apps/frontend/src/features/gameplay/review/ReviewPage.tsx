@@ -1,3 +1,3 @@
-export function Review() {
-  return <div>Game Review</div>
+export const Review = () => {
+  return <div>review placeholder</div>
 }

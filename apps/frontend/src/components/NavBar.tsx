@@ -1,3 +1,3 @@
-export function NavBar() {
-  return <div>Navigation Bar</div>
+export const NavBar = () => {
+  return <div>placeholder</div>
 }

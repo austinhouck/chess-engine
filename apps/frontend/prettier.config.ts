@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   arrowParens: 'always',
   endOfLine: 'lf',
   semi: false,
