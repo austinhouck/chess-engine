@@ -73,6 +73,21 @@ class ShannonEvaluator(Evaluator):
         return bin(int(bitboard)).count('1')
 
 
-class EvalFunction(Enum):
-    """Selects which Evaluator class Search uses to score a board."""
-    SHANNON = ShannonEvaluator
+class EvalFunction(str, Enum):
+    """Selects which Evaluator class Search uses to score a board.
+
+    Each member is both a plain string (what db.models.Game.computer_evaluator
+    stores and what the API accepts/returns) and carries the actual Evaluator
+    implementation via `eval_class` - one enum, no separate DB-facing copy to
+    keep in sync.
+    """
+
+    SHANNON = ("shannon", ShannonEvaluator)
+
+    eval_class: type[Evaluator]
+
+    def __new__(cls, value: str, eval_class: type[Evaluator]) -> "EvalFunction":
+        obj = str.__new__(cls, value)
+        obj._value_ = value
+        obj.eval_class = eval_class
+        return obj

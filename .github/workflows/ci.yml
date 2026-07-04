@@ -15,5 +15,5 @@ jobs:
           enable-cache: true
 
       - name: uv check
-        working-directory: src/backend
+        working-directory: apps/backend
         run: uv check --locked --preview-features check-command

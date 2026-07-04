@@ -2,7 +2,7 @@ import os
 import cmd
 import subprocess
 from bulletchess import *
-from engine import Engine
+from engine import Engine, compute_best_move
 
 engine = Engine()
 
@@ -59,9 +59,8 @@ class CLI(cmd.Cmd):
 
     def do_get_evaluation(self, depth: str) -> None:
         """Evaluate the board using minimax algorithm: get_evaluation [depth]"""
-        search = engine.search_algorithm.value(engine.eval_function.value())
-        _, evaluation = search.search(engine.board, int(depth), True)
-        print(f"Board evaluation at depth {depth}: {evaluation}")
+        outcome = compute_best_move(engine.board, engine.search_algorithm, engine.eval_function, int(depth))
+        print(f"Board evaluation at depth {depth}: {outcome.evaluation}")
 
     def do_export(self, arg: str) -> None:
         """Export the current game: export [pgn|fen] [filename]"""
