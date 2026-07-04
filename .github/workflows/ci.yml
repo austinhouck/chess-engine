@@ -4,11 +4,8 @@ on:
   pull_request:
 
 jobs:
-  backend:
+  uv-check:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -21,14 +18,58 @@ jobs:
         working-directory: apps/backend
         run: uv check --locked --preview-features check-command
 
-      # --cov-fail-under=80 (set in pyproject.toml) fails this step if overall
-      # coverage drops below 80%. `pipefail` makes sure that failure survives
-      # the pipe into `tee` (which always exits 0 on its own).
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
       - name: Run tests
         working-directory: apps/backend
         run: |
           set -o pipefail
           uv run pytest --junitxml=pytest.xml | tee pytest-coverage.txt
+
+      # Coverage data + reports handed off to the `coverage` job, which runs
+      # on a separate runner with no access to this job's filesystem.
+      - name: Upload coverage data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-data
+          path: |
+            apps/backend/.coverage
+            apps/backend/pytest-coverage.txt
+            apps/backend/pytest.xml
+
+  coverage:
+    needs: tests
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Download coverage data
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-data
+          path: apps/backend
+
+      - name: Require 80% coverage
+        working-directory: apps/backend
+        run: uv run coverage report --fail-under=80
 
       - name: Comment coverage on PR
         if: always()
