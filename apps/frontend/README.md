@@ -1,4 +1,4 @@
-# bun-react-template
+# chess-engine-ui
 
 To install dependencies:
 

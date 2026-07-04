@@ -1,3 +1,5 @@
+### Frontend ###
+
 # dependencies (bun install)
 node_modules
 
@@ -32,3 +34,21 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+
+### Backend ###
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# VS Code settings
+.vscode/
+
