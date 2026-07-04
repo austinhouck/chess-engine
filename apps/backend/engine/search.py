@@ -5,7 +5,7 @@ from enum import Enum
 
 from bulletchess import Board, Move, CHECKMATE, DRAW, FORCED_DRAW
 
-from evaluation import Evaluator
+from engine.evaluation import Evaluator
 
 
 class Search(ABC):
@@ -64,6 +64,21 @@ class NaiveMiniMax(Search):
             return best_move, min_eval
 
 
-class SearchAlgorithm(Enum):
-    """Selects which Search class Engine uses to pick a move."""
-    NAIVE_MINIMAX = NaiveMiniMax
+class SearchAlgorithm(str, Enum):
+    """Selects which Search class Engine uses to pick a move.
+
+    Each member is both a plain string (what db.models.Game.computer_algorithm
+    stores and what the API accepts/returns) and carries the actual Search
+    implementation via `search_class` - one enum, no separate DB-facing copy
+    to keep in sync.
+    """
+
+    NAIVE_MINIMAX = ("naive_minimax", NaiveMiniMax)
+
+    search_class: type[Search]
+
+    def __new__(cls, value: str, search_class: type[Search]) -> "SearchAlgorithm":
+        obj = str.__new__(cls, value)
+        obj._value_ = value
+        obj.search_class = search_class
+        return obj
