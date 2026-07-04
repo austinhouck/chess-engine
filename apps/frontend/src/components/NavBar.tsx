@@ -15,7 +15,7 @@ const NavBarContainer = styled.div`
   width: 100%;
   min-height: 48px;
   max-height: 48px;
-  background-color: #333;
+  background-color: #2e2e2e;
   color: white;
   padding: 16px;
   display: flex;
@@ -31,6 +31,6 @@ const NavBarContainer = styled.div`
   }
 
   span {
-    opacity: 0.5;
+    color: #ababad;
   }
 `
