@@ -49,6 +49,13 @@ wheels/
 # Virtual environments
 .venv
 
+# Test/coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+pytest-coverage.txt
+pytest.xml
+
 # VS Code settings
 .vscode/
 

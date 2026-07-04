@@ -4,8 +4,11 @@ on:
   pull_request:
 
 jobs:
-  uv-check:
+  backend:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -17,3 +20,19 @@ jobs:
       - name: uv check
         working-directory: apps/backend
         run: uv check --locked --preview-features check-command
+
+      # --cov-fail-under=80 (set in pyproject.toml) fails this step if overall
+      # coverage drops below 80%. `pipefail` makes sure that failure survives
+      # the pipe into `tee` (which always exits 0 on its own).
+      - name: Run tests
+        working-directory: apps/backend
+        run: |
+          set -o pipefail
+          uv run pytest --junitxml=pytest.xml | tee pytest-coverage.txt
+
+      - name: Comment coverage on PR
+        if: always()
+        uses: MishaKav/pytest-coverage-comment@v1
+        with:
+          pytest-coverage-path: apps/backend/pytest-coverage.txt
+          junitxml-path: apps/backend/pytest.xml
