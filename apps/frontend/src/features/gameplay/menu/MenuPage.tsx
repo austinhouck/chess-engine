@@ -1,4 +1,4 @@
-export const Menu = () => {
+const Menu = () => {
   return (
     <div>
       <h1>Chess</h1>
@@ -11,3 +11,4 @@ export const Menu = () => {
     </div>
   )
 }
+export default Menu

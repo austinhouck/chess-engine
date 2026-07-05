@@ -1,11 +1,11 @@
 import { Layout } from '@/components/Layout'
 import { Route, Routes } from 'react-router'
-import { Match } from './features/gameplay/match/MatchPage'
-import { Menu } from './features/gameplay/menu/MenuPage'
-import { Review } from './features/gameplay/review/ReviewPage'
-import { Landing } from './features/landing/LandingPage'
+import Match from './features/gameplay/match/MatchPage'
+import Menu from './features/gameplay/menu/MenuPage'
+import Review from './features/gameplay/review/ReviewPage'
+import Landing from './features/landing/LandingPage'
 
-export const CERoutes = () => {
+const CERoutes = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
@@ -17,3 +17,4 @@ export const CERoutes = () => {
     </Routes>
   )
 }
+export default CERoutes
