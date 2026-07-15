@@ -15,4 +15,4 @@ const server = serve({
   },
 })
 
-console.log(`Server live @ ${server.url}`)
+console.log(`♟⛭ Chess Engine • Frontend @ ${server.url}`)

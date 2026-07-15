@@ -3,10 +3,19 @@ import styled from 'styled-components'
 const MatchControls = () => {
   return (
     <ControlsContainer>
-      <ControlButton>{`❘⏴`}</ControlButton>
-      <ControlButton>{`⏴`}</ControlButton>
-      <ControlButton>{`⏵`}</ControlButton>
-      <ControlButton>{`⏵❘`}</ControlButton>
+      <ControlButton
+        type="button"
+        aria-label="Go to first move"
+      >{`❘⏴`}</ControlButton>
+      <ControlButton
+        type="button"
+        aria-label="Previous move"
+      >{`⏴`}</ControlButton>
+      <ControlButton type="button" aria-label="Next move">{`⏵`}</ControlButton>
+      <ControlButton
+        type="button"
+        aria-label="Go to last move"
+      >{`⏵❘`}</ControlButton>
     </ControlsContainer>
   )
 }

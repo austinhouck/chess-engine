@@ -19,7 +19,7 @@ const NavBarContainer = styled.div`
   color: white;
   padding: 16px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   gap: 16px;
 
@@ -32,5 +32,19 @@ const NavBarContainer = styled.div`
 
   span {
     color: #ababad;
+  }
+`
+
+const NavLink = styled(Link)`
+  font-size: 16px;
+  font-weight: bold;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  &:hover {
+    border-bottom: 2px solid white;
+  }
+  &:active {
+    border-bottom: 2px solid white;
   }
 `
