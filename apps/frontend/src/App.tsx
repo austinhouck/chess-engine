@@ -1,12 +1,15 @@
 import '@/index.css'
-import { CERoutes } from '@/Routes'
+import CERoutes from '@/Routes'
+import { MotionConfig } from 'motion/react'
 import { BrowserRouter } from 'react-router'
 
-export function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <CERoutes />
-    </BrowserRouter>
+    <MotionConfig>
+      <BrowserRouter>
+        <CERoutes />
+      </BrowserRouter>
+    </MotionConfig>
   )
 }
 
